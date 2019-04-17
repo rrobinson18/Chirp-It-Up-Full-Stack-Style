@@ -1,26 +1,31 @@
 import * as React from 'react';
 
 import './scss/app';
+import blogs from '../server/db/blogs';
 
 export default class App extends React.Component<IAppProps, IAppState> {
 
     constructor(props: IAppProps) {
         super(props);
 
-        this.state = { name: null };
+        this.state = { blogs: [] };
     }
 
-    async componentWillMount() {
-        let r = await fetch('/api/hello');
-        let name = await r.json();
-        this.setState({ name })
+    async componentDidMount() {
+        let r = await fetch('/api/blogs');
+        let blogs = await r.json();
+        this.setState({ blogs })
     }
 
     render () {
         return (
             <main className="container">
-                <h1 className="covalence-blue">Hello {this.state.name}!</h1>
-                <h2></h2>
+                <h1 className="covalence-blue">My Blog!</h1>
+                <ul className="list-group">
+                    {this.state.blogs.map(blogs => {
+                        return <li className="list-group-item">{blogs.title}</li>
+                    })}
+                </ul>
             </main>
         )
     }
@@ -31,5 +36,5 @@ interface IAppProps {
 }
 
 interface IAppState {
-    name: string;
+    blogs: Array<{title: string, content: string}>;
 }
