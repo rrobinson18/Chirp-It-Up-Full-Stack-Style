@@ -1,19 +1,17 @@
-import { Connection } from './index';
-import { resolve } from 'path';
-import { rejects } from 'assert';
+import { Query } from './index';
 
-export const all = async () => {
-    return new Promise((resolve, reject) => {
 
-        Connection.query('SELECT * from blogs', (err, results) => {
-            if(err) {
-                return reject(err); 
-            }
-            resolve(results);
-        });
-    })
-}
+const all = async () => Query('SELECT * from blogs');   
+const one = async (id: number) => Query('SELECT * from blogs WHERE id = ?', [id]);
+const deleteBlog = async (id: number) => Query('DELETE FROM blogs where id = ?', [id]);
+const postBlog = async (title: string, content: string,  authorid: number) => Query(`INSERT INTO blogs (title, content, authorid) VALUES ('${title}', '${content}', '${authorid}')`);
+const updateBlog = async (id: number, title: string, content: string) => Query(`UPDATE Blogs SET title = '${title}', content = '${content}', WHERE id = ?`, [id]);
+
 
 export default {
-    all
+    all, 
+    one,
+    deleteBlog,
+    postBlog,
+    updateBlog
 }
