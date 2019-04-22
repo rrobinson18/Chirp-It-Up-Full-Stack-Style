@@ -24,10 +24,7 @@ async componentDidMount() {
         return (
           <BlogCard 
           key={blog.id}
-          id={blog.id}
-          title={blog.title}
-          content={blog.content}
-          _created={blog._created}
+         blog={blog}
           />
         )
       })
