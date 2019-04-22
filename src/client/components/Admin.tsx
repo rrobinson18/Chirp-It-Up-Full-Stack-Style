@@ -52,7 +52,7 @@ export default class Admin extends React.Component<IAdminProps, IAdminState> {
     handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         try {
-            await fetch(`/api/chirps/${this.props.match.params.id}`, {
+            await fetch(`/api/blogd/${this.props.match.params.id}`, {
                 method: 'DELETE',
             });
             this.props.history.push('/');
