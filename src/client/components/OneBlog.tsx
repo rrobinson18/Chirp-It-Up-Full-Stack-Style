@@ -50,7 +50,7 @@ export default class OneBlog extends React.Component<
           <h6>{this.state.blog._created}</h6>
           <p>{this.state.blog.content}</p>
           <Link
-            to={`/admin/${this.props.match.params.id}`}
+            to={`/id/${this.props.match.params.id}`}
             className="btn btn-outline-info mt-2">Edit Blog
           </Link>
         </div>

@@ -34,7 +34,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
                         <Route exact path="/" component={BlogList} />
                         <Route exact path="/:id" component={OneBlog} />
                         <Route exact path="/admin" component={Admin} />
-                        <Route />
+                        <Route exact path="/new" component={AddBlog} />
                     </Switch>
                </Fragment>
            </Router>
