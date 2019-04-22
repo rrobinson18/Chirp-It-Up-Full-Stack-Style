@@ -15,8 +15,8 @@ export default class Nav extends React.Component<INavProps, INavState> {
         <nav className="navbar navbar-inverse">
         <div className="container-fluid">
         
-          <Link to="/" className="btn btn-success mt-5 mx-5 mb-5">Blogs</Link>
-          <Link to="/new" className="btn btn-outline-success mt-5 mx-5 mb-5">Add Blog</Link>
+          <Link to="/" className="btn btn-primary mt-5 mx-5 mb-5">Blogs</Link>
+          <Link to="/new" className="btn btn-outline-primary mt-5 mx-5 mb-5">Add Blog</Link>
           
         </div>
       </nav>

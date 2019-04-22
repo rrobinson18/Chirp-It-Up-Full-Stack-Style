@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 
 
-export default class AddBlog extends React.Component<IAddBlogProps, IAppBlogState> {
-    constructor(props: IAddBlogProps) {
+ export default class AddBlog extends React.Component<IAddBlogProps, IAppBlogState> {
+    constructor(props) {
         super(props);
 
         this.state = {
             title: '',
             content: ''
         }
+        
+    this.addBlog = this.addBlog.bind(this);
+    this.updateTitle = this.updateTitle.bind(this);
+    this.updateContent = this.updateContent.bind(this);
     }
+
 
     updateContent = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({ content: e.target.value });
@@ -42,25 +47,24 @@ export default class AddBlog extends React.Component<IAddBlogProps, IAppBlogStat
     
 render() {
     return (
+        <Fragment>
         <div className="container">
-            <div className="row my-2">
-                <div className="col-md-12">
-                    <form className="form-group p-3 border border-warning rounded">
-                        <label>Blog Title </label>
-                        <input
-                            onChange={ this.updateTitle}
-                            className="p-1 form-control"
-                            placeholder="Your username ..." />
-                        <label>Blog Text: </label>
+                <div className="form-group m-2">
+                    <form className="m-4 bg-light border border-dark rounded">
+                        <label className="font-weight-bold">Blog Title </label>
+                        <input type="text" onChange={ this.updateTitle}
+                            className="form-control" id="blog-title"
+                            placeholder="Blog Title" />
+                        <label className="font-weight-bold">Blog Text</label>
                         <input
                             onChange={ this.updateContent }
-                            className="p-1 form-control"
+                            className="form-control" id="blog-text"
                             placeholder="Type here ..." />
-                        <button onClick={ this.addBlog } className="btn btn-lg btn-primary mt-2">Submit</button>
+                        <button onClick={ this.addBlog } className="btn btn-primary m-2">Submit</button>
                     </form>
                 </div>
             </div>
-        </div>
+            </Fragment>
         );
     }   
 }
