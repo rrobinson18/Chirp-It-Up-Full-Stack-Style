@@ -44,11 +44,11 @@ export default class OneBlog extends React.Component<
       <div className="row">
         <div className="col-md-12">
           <h1 className="text-center">{this.state.blog.title}</h1>
-          <h6>Author: {this.state.blog.authorid}</h6>
+          <h6>A {this.state.blog.authorid}</h6>
           <h6>{this.state.blog._created}</h6>
           <p>{this.state.blog.content}</p>
           <Link
-            to={`/id/${this.props.match.params.id}`}
+            to={`/id/${this.props.match.params.id}/admin`}
             className="btn btn-outline-info mt-2">Edit Blog
           </Link>
         </div>

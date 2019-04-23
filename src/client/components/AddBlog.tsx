@@ -11,10 +11,6 @@ import { RouteComponentProps } from 'react-router-dom';
             title: '',
             content: ''
         }
-        
-    this.addBlog = this.addBlog.bind(this);
-    this.updateTitle = this.updateTitle.bind(this);
-    this.updateContent = this.updateContent.bind(this);
     }
 
 
