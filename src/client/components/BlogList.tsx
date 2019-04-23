@@ -24,7 +24,7 @@ async componentDidMount() {
         return (
           <BlogCard 
           key={blog.id}
-         blog={blog}
+          blog={blog}
           />
         )
       })

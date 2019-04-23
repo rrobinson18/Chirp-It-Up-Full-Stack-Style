@@ -29,7 +29,11 @@ import { RouteComponentProps } from 'react-router-dom';
 
     addBlog = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        let body = { title: this.state.title, content: this.state.content };
+        let body = { 
+            title: this.state.title, 
+            content: this.state.content,
+            authorid: 1
+             };
         try {
             await fetch('/api/blogs/', {
                 method: 'POST',
@@ -38,11 +42,11 @@ import { RouteComponentProps } from 'react-router-dom';
                     "Content-type": "application/json"
                 }
             });
+            this.setState({ title: "", content: "" });
             this.props.history.push('/');
         } catch (error) {
             console.log(error);
         }
-        this.setState({ title: "", content: "" });
     }    
     
 render() {
@@ -50,15 +54,13 @@ render() {
         <Fragment>
         <div className="container">
                 <div className="form-group m-2">
-                    <form className="m-4 bg-light border border-dark rounded">
+                    <form className="p-4 bg-light border border-dark rounded">
                         <label className="font-weight-bold">Blog Title </label>
                         <input type="text" onChange={ this.updateTitle}
                             className="form-control" id="blog-title"
                             placeholder="Blog Title" />
                         <label className="font-weight-bold">Blog Text</label>
-                        <input
-                            onChange={ this.updateContent }
-                            className="form-control" id="blog-text"
+                        <input className="form-control" id="blog-text" onChange={ this.updateContent }
                             placeholder="Type here ..." />
                         <button onClick={ this.addBlog } className="btn btn-primary m-2">Submit</button>
                     </form>

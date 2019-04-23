@@ -12,13 +12,13 @@ export default class Nav extends React.Component<INavProps, INavState> {
   
     render() {
       return (
-        <nav className="navbar navbar-inverse">
-        <div className="container-fluid">
-        
-          <Link to="/" className="btn btn-primary mt-5 mx-5 mb-5">Blogs</Link>
-          <Link to="/new" className="btn btn-outline-primary mt-5 mx-5 mb-5">Add Blog</Link>
-          
-        </div>
+        <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+        <ul className="navbar-nav justify-content-end">
+        <li className="nav-item">
+          <Link to="/" className=" mt-5 mx-5 mb-5">Blogs</Link>
+          <Link to="/new" className="mt-5 mx-5 mb-5">Add Blog</Link>
+          </li>
+        </ul>
       </nav>
       );
     }

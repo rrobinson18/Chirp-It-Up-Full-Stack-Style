@@ -3,16 +3,14 @@ import { RouteComponentProps } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
 
-interface IOneBlogProps extends RouteComponentProps<{ id: string }> {
-  id: number;
-}
+interface IOneBlogProps extends RouteComponentProps<{ id: string }> { }
 
 export interface IOneBlogState {
   blog: {
     title: string;
     content: string;
-    name: string;
-    _created: string;
+    authorid: number;
+    _created: Date;
   };
 }
 
@@ -26,7 +24,7 @@ export default class OneBlog extends React.Component<
       blog: {
         title: null,
         content: null,
-        name: null,
+        authorid: null,
         _created: null
       }
     };
@@ -46,7 +44,7 @@ export default class OneBlog extends React.Component<
       <div className="row">
         <div className="col-md-12">
           <h1 className="text-center">{this.state.blog.title}</h1>
-          <h6>Author: {this.state.blog.name}</h6>
+          <h6>Author: {this.state.blog.authorid}</h6>
           <h6>{this.state.blog._created}</h6>
           <p>{this.state.blog.content}</p>
           <Link

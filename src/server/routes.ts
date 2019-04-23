@@ -18,7 +18,8 @@ router.get('/api/blogs', async (req, res) => {
 
 router.get('/api/blogs/:id', async (req, res) => {
     try {
-        res.json((await DB.blogs.one(req.params.id)));
+        let [blog] = await DB.blogs.one(req.params.id);
+        res.json(blog);
     } catch(e) {
         console.log(e);
         res.sendStatus(500);
@@ -30,7 +31,7 @@ router.post('/api/blogs', async (req, res) => {
         let title = req.body.title;
         let authorid = req.body.authorid;
         let content = req.body.content;
-           res.json(await DB.blogs.postBlog(title, authorid, content));
+           res.json(await DB.blogs.postBlog(title, content, authorid));
        } catch (e) {
            console.log(e);
            res.sendStatus(500);

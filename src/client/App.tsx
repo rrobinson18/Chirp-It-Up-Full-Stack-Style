@@ -12,40 +12,25 @@ import Admin from './components/Admin';
 
 export default class App extends React.Component<IAppProps, IAppState> {
 
-    constructor(props: IAppProps) {
-        super(props);
-
-        this.state = { blogs: [] };
-    }
-
-    async componentDidMount() {
-        let r = await fetch('/api/blogs');
-        let blogs = await r.json();
-        this.setState({ blogs })
-    }
-
     render () {
         return (
            <Router>
-               <Fragment>
+               <>
                     <Nav />
 
                     <Switch>
                         <Route exact path="/" component={BlogList} />
-                        <Route exact path="/:id" component={OneBlog} />
+                        <Route exact path="/view/:id" component={OneBlog} />
                         <Route exact path="/admin" component={Admin} />
                         <Route exact path="/new" component={AddBlog} />
                     </Switch>
-               </Fragment>
+                    {/* <Footer /> */}
+               </>
            </Router>
         )
     }
 }
 
-interface IAppProps {
+interface IAppProps { }
 
-}
-
-interface IAppState {
-    blogs: Array<{title: string, content: string}>;
-}
+interface IAppState { }
