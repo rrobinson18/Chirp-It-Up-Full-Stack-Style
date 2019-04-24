@@ -12,6 +12,7 @@ export interface IOneBlogState {
     authorid: number;
     _created: Date;
   };
+  tags: { name: string; }[];
 }
 
 export default class OneBlog extends React.Component<
@@ -26,7 +27,8 @@ export default class OneBlog extends React.Component<
         content: null,
         authorid: null,
         _created: null
-      }
+      },
+      tags: []
     };
   }
 
@@ -36,7 +38,10 @@ export default class OneBlog extends React.Component<
       .then(blog => {
         this.setState({ blog })
       })
-      .catch(error => console.log(error))
+      .catch(error => console.log(error));
+      fetch(`/api/blogtags/${this.props.match.params.id}`)
+      .then(response => response.json())
+      .then(tags => this.setState({ tags }));
   }
 
   render() {
@@ -44,11 +49,14 @@ export default class OneBlog extends React.Component<
       <div className="row">
         <div className="col-md-12">
           <h1 className="text-center">{this.state.blog.title}</h1>
-          <h6>A {this.state.blog.authorid}</h6>
+          <h6> {this.state.blog.authorid}</h6>
+          <div>
+            {this.state.tags.map((tag, index) => <span key={index} className="badge badge-info p-2 my-1 mx-2">{tag.name}</span>)}
+          </div>
           <h6>{this.state.blog._created}</h6>
           <p>{this.state.blog.content}</p>
           <Link
-            to={`/id/${this.props.match.params.id}/admin`}
+            to={`/${this.props.match.params.id}/admin`}
             className="btn btn-outline-info mt-2">Edit Blog
           </Link>
         </div>

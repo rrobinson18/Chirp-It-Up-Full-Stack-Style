@@ -21,7 +21,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
                     <Switch>
                         <Route exact path="/" component={BlogList} />
                         <Route exact path="/view/:id" component={OneBlog} />
-                        <Route exact path="/admin" component={Admin} />
+                        <Route exact path="/:id/admin" component={Admin} />
                         <Route exact path="/new" component={AddBlog} />
                     </Switch>
                     {/* <Footer /> */}

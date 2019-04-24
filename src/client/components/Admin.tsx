@@ -12,7 +12,7 @@ export default class Admin extends React.Component<IAdminProps, IAdminState> {
         }
     }
 
-    async ComponentDidMount() {
+    async componentDidMount() {
         try {
             let r = await fetch(`/api/blogs/${this.props.match.params.id}`);
             let blog: { title: string, content: string } = await r.json();
@@ -23,12 +23,12 @@ export default class Admin extends React.Component<IAdminProps, IAdminState> {
     }
 
     handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({ title: e.target.value });
+        this.setState({ content: e.target.value });
     }
 
 
     handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({ content: e.target.value });
+        this.setState({ title: e.target.value });
     }
 
     handleEdit = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -46,20 +46,18 @@ export default class Admin extends React.Component<IAdminProps, IAdminState> {
         } catch (error) {
             console.log(error);
         }
-        this.setState({ title: "", content: "" });
     }   
 
     handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         try {
-            await fetch(`/api/blogd/${this.props.match.params.id}`, {
-                method: 'DELETE',
+            await fetch(`/api/blogs/${this.props.match.params.id}`, {
+                method: 'DELETE'
             });
             this.props.history.push('/');
         } catch (error) {
             console.log(error);
         }
-        this.setState({ title: "", content: "" }); 
     }
     
 render() {
@@ -67,7 +65,7 @@ render() {
         <div className="container">
             <div className="row my-2">
                 <div className="col-md-12">
-                    <form className="form-group p-3 border border-warning rounded">
+                    <form className="form-group p-3 border border-dark rounded">
                         <label>Title: </label>
                         <input
                             value={this.state.title}
@@ -80,7 +78,7 @@ render() {
                             onChange={ this.handleMessageChange }
                             className="p-1 form-control"
                             placeholder="Type here ..." />
-                        <button onClick={ this.handleEdit } className="btn btn-lg btn-warning mt-2">Save Edit!</button>
+                        <button onClick={ this.handleEdit } className="btn btn-lg btn-primary mt-2">Save Edit!</button>
                         <button onClick={ this.handleDelete } className="btn btn-lg btn-danger mt-2">Delete!</button>
                     </form>
                 </div>

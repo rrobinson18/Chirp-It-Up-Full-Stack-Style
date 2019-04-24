@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import { string } from 'prop-types';
 
 
 
@@ -10,7 +11,8 @@ import { RouteComponentProps } from 'react-router-dom';
         this.state = {
             title: '',
             content: ''
-        }
+        };
+        tags: [];
     }
 
 
@@ -55,6 +57,8 @@ render() {
                         <input type="text" onChange={ this.updateTitle}
                             className="form-control" id="blog-title"
                             placeholder="Blog Title" />
+                        <label className="font-weight-bold">Blog Tag</label>
+                        <select>{this.state.tags.name}</select>
                         <label className="font-weight-bold">Blog Text</label>
                         <input className="form-control" id="blog-text" onChange={ this.updateContent }
                             placeholder="Type here ..." />
@@ -75,3 +79,4 @@ render() {
         title: string;
         content: string;
     }
+    tags:{}[]

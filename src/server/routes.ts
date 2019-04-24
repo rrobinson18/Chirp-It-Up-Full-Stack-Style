@@ -61,8 +61,25 @@ router.delete('/api/blogs/:id', async (req, res) => {
 });
 
 
+router.get('/api/blogtags/:blogid', async (req, res) => {
+    try {
+        let blogid = req.params.blogid;
+        res.json(await DB.blogtags.getBlogTags(blogid))
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
 
 
+router.get('/api/tags/:tagid', async (req, res, next) => {
+    try {
+        let tags = await DB.tags.getAll();
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+})
 
 
 
