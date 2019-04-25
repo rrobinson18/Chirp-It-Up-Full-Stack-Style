@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as moment from "moment";
 import { Link } from "react-router-dom";
 
 
@@ -19,10 +20,10 @@ const BlogCard: React.SFC<BlogCardProps> = props => {
         <div className="card-body">
           <div className="card-title font-weight-bold border border-dark border-top-0 border-left-0 border-right-0">
             {props.blog.title} </div>
-            <div>
+            {/* <div>
             {this.state.tags.map((tag, index) => <span key={index} className="badge badge-info p-2 my-1 mx-2">{tag.name}</span>)}
-          </div>
-            <div className="card-date font-weight-bold">{props.blog._created}</div>
+          </div> */}
+            <div className="card-date font-weight-bold">{moment(props.blog._created).format("MMM Do, YYYY")}</div>
             <p className="card-text">{props.blog.content.substring(0, 100)}...</p>
             <Link to={`/view/${props.blog.id}`} className="btn btn-outline-info mt-2">View Blog</Link>
          

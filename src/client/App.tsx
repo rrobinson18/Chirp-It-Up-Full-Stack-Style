@@ -16,6 +16,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
         return (
            <Router>
                <>
+                    
                     <Nav />
 
                     <Switch>

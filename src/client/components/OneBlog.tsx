@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as moment from "moment";
 import { RouteComponentProps } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
@@ -53,11 +54,13 @@ export default class OneBlog extends React.Component<
           <div>
             {this.state.tags.map((tag, index) => <span key={index} className="badge badge-info p-2 my-1 mx-2">{tag.name}</span>)}
           </div>
-          <h6>{this.state.blog._created}</h6>
+          <h6>{moment(this.state.blog._created).format("MMM Do, YYYY")}</h6>
           <p>{this.state.blog.content}</p>
           <Link
             to={`/${this.props.match.params.id}/admin`}
             className="btn btn-outline-info mt-2">Edit Blog
+          </Link>
+          <Link to="/" className="btn btn-outline-dark mt-2">Edit Blog
           </Link>
         </div>
       </div>
