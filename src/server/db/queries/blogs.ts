@@ -1,4 +1,4 @@
-import { Query } from './index';
+import { Query } from '../index';
 
 
 const all = async () => Query('SELECT * from blogs');   

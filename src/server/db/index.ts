@@ -1,10 +1,13 @@
 import * as mysql from 'mysql';
 import config from '../config';
 
-import blogs from './blogs';
-import authors from './authors';
-import blogtags from './blogtags';
-import tags from './tags';
+//table query imports
+import blogs from './queries/blogs';
+import authors from './queries/authors';
+import blogtags from './queries/blogtags';
+import tags from './queries/tags';
+import users from './queries/users';
+import accesstokens from './queries/accesstoken';
 
 export const Connection = mysql.createConnection(config.mysql);
 
@@ -25,5 +28,7 @@ export default {
     blogs,
     authors,
     blogtags,
-    tags
+    tags, 
+    users, 
+    accesstokens
 }

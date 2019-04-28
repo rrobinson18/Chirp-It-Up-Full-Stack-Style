@@ -1,4 +1,4 @@
-import { Query } from '../db/index';
+import { Query } from '../index';
 
 const getAll = async () => Query(`SELECT * FROM tags`);
 

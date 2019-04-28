@@ -27,3 +27,20 @@ create table BlogTags (
 	blogid int null,
     tagid int null
     )
+
+
+-- Auth Blog --
+
+create table users(
+	password varchar(60) null,
+    email varchar(60),
+    role varchar(25) default 'guest'
+    );
+    
+    create table accesstokens (
+    id int not null auto_increment primary key, 
+    userid int not null,
+    tokens text null,
+    expires datetime null,
+    _created datetime default current_timestamp
+    );

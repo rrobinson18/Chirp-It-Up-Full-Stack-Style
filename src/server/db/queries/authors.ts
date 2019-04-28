@@ -1,4 +1,4 @@
-import { Connection } from './index';
+import { Connection } from '../index';
 
 
 export const allAuthor = async () => {
