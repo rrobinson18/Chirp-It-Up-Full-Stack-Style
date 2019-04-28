@@ -1,5 +1,8 @@
 import * as express from 'express';
-import DB from './db';
+import DB from '../db';
+
+import authRouter from './auth';
+import apiRouter from './api';
 
 const router = express.Router();
 
@@ -7,24 +10,9 @@ router.get('/api/hello', (req, res, next) => {
     res.json('World');
 });
 
-router.get('/api/blogs', async (req, res) => {
-    try {
-        res.json(await DB.blogs.all());
-    } catch(e) {
-        console.log(e);
-        res.sendStatus(500);
-    }
-});
 
-router.get('/api/blogs/:id', async (req, res) => {
-    try {
-        let [blog] = await DB.blogs.one(req.params.id);
-        res.json(blog);
-    } catch(e) {
-        console.log(e);
-        res.sendStatus(500);
-    }
-});
+
+
 
 router.post('/api/blogs', async (req, res) => {
        try {
@@ -86,6 +74,7 @@ router.get('/api/tags', async (req, res, next) => {
     }
 })
 
-
+router.use('/auth', authRouter);
+router.use('/api', apiRouter);
 
 export default router;
