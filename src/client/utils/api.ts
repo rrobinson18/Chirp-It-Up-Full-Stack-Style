@@ -10,9 +10,9 @@ export const json = async <T = any>(uri: string, method: string = 'GET', body?: 
 
     let headers: any = {
         'Content-type': 'application/json'
-    }
+    };
 
-    if(AccessToken) {
+    if (AccessToken) {
         headers['Authorization'] = `Bearer ${AccessToken}`;
     }
 
@@ -38,7 +38,7 @@ export const SetAccessToken = (token: string, user: {} = {userid: undefined, rol
     AccessToken = token;
     User = user;
 
-    localStorage.setItem('token', token);
+    localStorage.setItem('tokens', token);
     localStorage.setItem('userid', User.userid);
     localStorage.setItem('role', User.role);
 };

@@ -12,23 +12,67 @@ const isAdmin: express.RequestHandler = (req, res, next) => {
     }
 };
 
-router.get('/api/blogs', async (req, res) => {
+
+router.get('/api/blogs/:id?', async (req, res, next) => {
+    let id = req.params.id;
+    if (id) {
+        try {
+            let [blog] = await DB.blogs.one(id);
+            res.json(blog);
+        } catch(e) {
+            console.log(e);
+            res.sendStatus(500);
+        }
+    } else {
+        try {
+            let blogs = await DB.blogs.all();
+            res.send(blogs);
+        } catch(e) {
+            console.log(e);
+            res.sendStatus(500);
+        }
+    }
+});
+
+
+router.post('/api/blogs', isAdmin,  async (req, res, next) => {
     try {
-        res.json(await DB.blogs.all());
-    } catch(e) {
+     let title = req.body.title;
+     let name = req.body.name;
+     let content = req.body.content;
+     //insert into blogs, get the blogid
+       let { insertId }: any = await DB.blogs.postBlog(title, content, name);
+     //insert into blogtags with that blogid and the tagid from front-end
+       await DB.blogtags.insertBlogTag(insertId, req.body.tagid);
+        res.json('Blog added!');
+    } catch (e) {
         console.log(e);
         res.sendStatus(500);
     }
 });
 
-router.get('/api/blogs/:id', isAdmin, async (req, res) => {
-    try {
-        let [blog] = await DB.blogs.one(req.params.id);
-        res.json(blog);
-    } catch(e) {
-        console.log(e);
-        res.sendStatus(500);
-    }
+router.put('/api/blogs/:id', isAdmin, async (req, res, next) => {
+ try {
+     let id = req.params.id;
+     let title = req.body.title;
+     let content = req.body.content;
+     res.json(await DB.blogs.updateBlog(id, title, content));
+ } catch (e) {
+     console.log(e);
+     res.sendStatus(500);
+ }
 });
+
+router.delete('/api/blogs/:id', isAdmin, async (req, res, next) => {
+ try {
+     let id = req.params.id;
+     res.json(await DB.blogs.deleteBlog(id));
+ } catch (e) {
+     console.log(e);
+     res.sendStatus(500);
+ }
+});
+
+
 
 export default router;
