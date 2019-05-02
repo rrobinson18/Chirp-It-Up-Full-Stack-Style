@@ -9,6 +9,7 @@ export interface BlogCardProps {
     title: string; 
     content: string; 
     authorid: number; 
+    name: string;
     _created: Date
    };
 }
@@ -18,13 +19,10 @@ const BlogCard: React.SFC<BlogCardProps> = props => {
     <div className="col-md-6">
       <div className="card m-2 border border-info">
         <div className="card-body">
-          <div className="card-title font-weight-bold border border-dark border-top-0 border-left-0 border-right-0">
-            {props.blog.title} </div>
-            {/* <div>
-            {this.state.tags.map((tag, index) => <span key={index} className="badge badge-info p-2 my-1 mx-2">{tag.name}</span>)}
-          </div> */}
-            <div className="card-date font-weight-bold">{moment(props.blog._created).format("MMM Do, YYYY")}</div>
-            <p className="card-text">{props.blog.content.substring(0, 100)}...</p>
+          <h5 className="card-title font-weight-bold border border-dark border-top-0 border-left-0 border-right-0">
+            {props.blog.title} </h5>
+            <h6 className="card-date font-weight-bold">{moment(props.blog._created).format("MMM Do, YYYY")}</h6>
+            <p className="card-text">{props.blog.name}</p>
             <Link to={`/view/${props.blog.id}`} className="btn btn-outline-info mt-2">View Blog</Link>
          
         </div>

@@ -3,11 +3,12 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import './scss/app';
 
-import Nav from './components/Nav';
-import AddBlog from './components/AddBlog';
-import BlogList from './components/BlogList';
-import OneBlog from './components/OneBlog';
-import Admin from './components/Admin';
+import Nav from './components/public/Nav'
+import AddBlog from './components/public/AddBlog';
+import BlogList from './components/public/BlogList';
+import OneBlog from './components/public/OneBlog';
+import Admin from './components/admin/Admin';
+import Login from './components/admin/Login';
 
 
 export default class App extends React.Component<IAppProps, IAppState> {
@@ -24,6 +25,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
                         <Route exact path="/view/:id" component={OneBlog} />
                         <Route exact path="/:id/admin" component={Admin} />
                         <Route exact path="/new" component={AddBlog} />
+                        <Route exact path="/login" component={Login} />
                     </Switch>
                     {/* <Footer /> */}
                </>

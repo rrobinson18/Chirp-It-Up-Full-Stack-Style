@@ -1,48 +1,36 @@
 import * as React from "react";
 import * as moment from "moment";
+import { json } from '../../utils/api';
 import { RouteComponentProps } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
 
-interface IOneBlogProps extends RouteComponentProps<{ id: string }> { }
-
-export interface IOneBlogState {
-  blog: {
-    title: string;
-    content: string;
-    authorid: number;
-    _created: Date;
-  };
-  tags: { name: string; }[];
-}
-
-export default class OneBlog extends React.Component<
-  IOneBlogProps,
-  IOneBlogState
-> {
+export default class OneBlog extends React.Component<IOneBlogProps, IOneBlogState> {
+  
   constructor(props: IOneBlogProps) {
     super(props);
     this.state = {
       blog: {
+        id: null,
         title: null,
         content: null,
         authorid: null,
-        _created: null
+        _created: null,
+        name: null,
       },
       tags: []
     };
   }
 
-  async componentDidMount() {
-    fetch(`/api/blogs/${this.props.match.params.id}`)
-      .then(response => response.json())
-      .then(blog => {
-        this.setState({ blog })
-      })
-      .catch(error => console.log(error));
-      fetch(`/api/blogtags/${this.props.match.params.id}`)
-      .then(response => response.json())
-      .then(tags => this.setState({ tags }));
+  async componentWillMount() {
+    let id = this.props.match.params.id;
+    try {
+      let blog = await json(`/api/blogs/${id}`);
+      let tags = await json(`/api/blogtags/${id}`);
+      this.setState({ blog, tags });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   render() {
@@ -66,4 +54,21 @@ export default class OneBlog extends React.Component<
       </div>
     );
   }
+}
+
+interface IOneBlogProps extends RouteComponentProps<{ id: string}> { }
+
+interface IOneBlogState {
+  blog: {
+    id: number,
+    title: string,
+    content: string,
+    authorid: number,
+    _created: Date,
+    name: string
+  };
+  tags: { 
+    id: number,
+    name: string,
+  }[]
 }

@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { json, User } from '../../utils/api';
 import { RouteComponentProps } from 'react-router-dom';
 
 
@@ -10,21 +11,27 @@ import { RouteComponentProps } from 'react-router-dom';
         this.state = {
             title: '',
             content: '',
+            name: '',
             selectedTag: '0',
+            saveStatus: '',
             tags: []
         }
     }
 
+    private alert: JSX.Element = null;
+    private saving: boolean = false;
+
     async componentDidMount() {
+        if(!User || User.userid === null || User.role != 'admin') {
+            this.props.history.replace('/login');
+        }
         try {
-            let r = await fetch('/api/tags');
-            let tags = await r.json();
+            let tags = await json('/api/tags');
             this.setState({ tags });
-        } catch (err) {
-            console.log(err);
+        } catch (e) {
+            console.log(e);
         }
     }
-
 
      updateContent = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({ content: e.target.value });
@@ -41,28 +48,46 @@ import { RouteComponentProps } from 'react-router-dom';
 
     addBlog = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+
+        if(this.saving) return;
+
         let body = { 
             title: this.state.title, 
             content: this.state.content,
-            authorid: 1,
+            name: this.state.name,
+            authorid: User.userid,
             tagid: this.state.selectedTag
              };
         try {
-            await fetch('/api/blogs/', {
-                method: 'POST',
-                body: JSON.stringify(body),
-                headers: {
-                    "Content-type": "application/json"
-                }
-            });
-            this.setState({ title: "", content: "" });
-            this.props.history.push('/');
-        } catch (error) {
-            console.log(error);
+            this.saving = true
+            let result = await json('/api/blogs/', 'POST', body);
+            if(result) {
+                this.setState({
+                    title: '',
+                    content: '',
+                    name: '',
+                    saveStatus: 'success'
+                });
+            } else {
+                this.setState({ saveStatus: 'error' });
+            }
+        } catch (e) {
+            this.setState({ saveStatus: 'error' })
+            throw(e);
+        } finally {
+            this.saving = false;
         }
     }    
     
 render() {
+
+    if(this.state.saveStatus === 'success') {
+        this.alert = <div className='alert alert-success p-1 m-3' role='alert'>Blog Added</div>
+    } else if(this.state.saveStatus === 'error') {
+        this.alert = <div className='alert alert-danger p-1 m-3' role='alert'>Error Adding Blog</div>
+
+    }
+
     return (
         <Fragment>
         <div className="container">
@@ -83,6 +108,7 @@ render() {
                         <input className="form-control" value={this.state.content} id="blog-text" onChange={ this.updateContent }
                             placeholder="Type here ..." />
                         <button onClick={ this.addBlog } className="btn btn-primary m-2">Submit</button>
+                        {this.alert}
                     </form>
                 </div>
             </div>
@@ -98,7 +124,9 @@ render() {
     interface IAppBlogState{
         title: string;
         content: string;
+        name: string;
         selectedTag: string;
+        saveStatus: string;
         tags: {
             id: number,
             name: string,
