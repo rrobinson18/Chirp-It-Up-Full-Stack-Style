@@ -44,12 +44,11 @@ export default class OneBlog extends React.Component<IOneBlogProps, IOneBlogStat
           </div>
           <h6>{moment(this.state.blog._created).format("MMM Do, YYYY")}</h6>
           <p>{this.state.blog.content}</p>
+          <Link to="/" className="btn btn-outline-dark mt-2">Go Back</Link>
           <Link
             to={`/${this.props.match.params.id}/admin`}
-            className="btn btn-outline-info mt-2">Edit Blog
-          </Link>
-          <Link to="/" className="btn btn-outline-dark mt-2">Edit Blog
-          </Link>
+            className="btn btn-outline-info mt-2">Edit Blog</Link>
+        
         </div>
       </div>
     );

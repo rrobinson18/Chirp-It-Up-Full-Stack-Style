@@ -21,4 +21,4 @@ passport.use(new LocalStrategy.Strategy({
     } catch (e) {
         done(e);
     }
-}))
+}));

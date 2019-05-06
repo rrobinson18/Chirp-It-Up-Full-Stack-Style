@@ -1,11 +1,10 @@
 import * as express from 'express';
-
 import DB from '../../db';
 
 const router = express.Router();
 
 const isAdmin: express.RequestHandler = (req, res, next) => {
-    if(!req.user || req.user.role !== 'admin') {
+    if (!req.user || req.user.role !== 'admin') {
         return res.sendStatus(401);
     } else {
         return next();
@@ -13,7 +12,7 @@ const isAdmin: express.RequestHandler = (req, res, next) => {
 };
 
 
-router.get('/api/blogs/:id?', async (req, res, next) => {
+router.get('/:id?', async (req, res, next) => {
     let id = req.params.id;
     if (id) {
         try {
@@ -35,7 +34,7 @@ router.get('/api/blogs/:id?', async (req, res, next) => {
 });
 
 
-router.post('/api/blogs', isAdmin,  async (req, res, next) => {
+router.post('/', isAdmin,  async (req, res, next) => {
     try {
      let title = req.body.title;
      let name = req.body.name;
@@ -51,7 +50,7 @@ router.post('/api/blogs', isAdmin,  async (req, res, next) => {
     }
 });
 
-router.put('/api/blogs/:id', isAdmin, async (req, res, next) => {
+router.put('/:id', isAdmin, async (req, res, next) => {
  try {
      let id = req.params.id;
      let title = req.body.title;
@@ -63,7 +62,7 @@ router.put('/api/blogs/:id', isAdmin, async (req, res, next) => {
  }
 });
 
-router.delete('/api/blogs/:id', isAdmin, async (req, res, next) => {
+router.delete('/:id', isAdmin, async (req, res, next) => {
  try {
      let id = req.params.id;
      res.json(await DB.blogs.deleteBlog(id));

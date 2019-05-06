@@ -26,8 +26,7 @@ class Login extends React.Component<ILoginProps, ILoginState> {
 
         e.preventDefault();
 
-        this.setState({ loginStatus: false })
-
+        this.setState({ loginStatus: false });
         if(this.loggingIn) return;
 
         try {
@@ -36,6 +35,7 @@ class Login extends React.Component<ILoginProps, ILoginState> {
                 email: this.state.email,
                 password: this.state.password
             });
+            
             if(result) {
                 SetAccessToken(result.token, { userid: result.userid, role: result.role });
                 if (result.role === 'admin') {

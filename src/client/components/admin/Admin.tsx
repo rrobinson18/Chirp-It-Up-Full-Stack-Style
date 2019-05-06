@@ -14,6 +14,7 @@ export default class Admin extends React.Component<IAdminProps, IAdminState> {
     }
 
     async componentDidMount() {
+        
         try {
             let r = await fetch(`/api/blogs/${this.props.match.params.id}`);
             let blog: { title: string, content: string } = await r.json();

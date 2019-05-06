@@ -5,7 +5,7 @@ import DB from '../../db';
 const router = express.Router();
 
 
-router.get('/api/tags', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
         let tags = await DB.tags.getAll();
         res.json(tags);

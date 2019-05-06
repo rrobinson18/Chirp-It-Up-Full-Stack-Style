@@ -3,7 +3,6 @@ import config from '../config';
 
 //table query imports
 import blogs from './queries/blogs';
-import authors from './queries/authors';
 import blogtags from './queries/blogtags';
 import tags from './queries/tags';
 import users from './queries/users';
@@ -26,7 +25,6 @@ export const Query = (query: string, values?: Array<string | number>) => {
 
 export default {
     blogs,
-    authors,
     blogtags,
     tags, 
     users, 

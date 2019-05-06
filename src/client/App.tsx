@@ -17,9 +17,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
         return (
            <Router>
                <>
-                    
                     <Nav />
-
                     <Switch>
                         <Route exact path="/" component={BlogList} />
                         <Route exact path="/view/:id" component={OneBlog} />

@@ -3,7 +3,7 @@ import * as express from 'express';
 import DB from '../../db';
 import { HashPassword } from '../../utils/security/password';
 import { CreateToken } from '../../utils/security/tokens';
-import { userInfo } from 'os';
+
 
 const router = express.Router();
 

@@ -5,7 +5,7 @@ import { RouteComponentProps } from 'react-router-dom';
 
 
  export default class AddBlog extends React.Component<IAddBlogProps, IAppBlogState> {
-    constructor(props) {
+    constructor(props: any) {
         super(props);
 
         this.state = {
@@ -22,7 +22,7 @@ import { RouteComponentProps } from 'react-router-dom';
     private saving: boolean = false;
 
     async componentDidMount() {
-        if(!User || User.userid === null || User.role != 'admin') {
+        if(!User || User.userid === null || User.role !== 'admin') {
             this.props.history.replace('/login');
         }
         try {
@@ -58,6 +58,7 @@ import { RouteComponentProps } from 'react-router-dom';
             authorid: User.userid,
             tagid: this.state.selectedTag
              };
+
         try {
             this.saving = true
             let result = await json('/api/blogs/', 'POST', body);
@@ -68,6 +69,7 @@ import { RouteComponentProps } from 'react-router-dom';
                     name: '',
                     saveStatus: 'success'
                 });
+                this.props.history.push('/');
             } else {
                 this.setState({ saveStatus: 'error' });
             }
