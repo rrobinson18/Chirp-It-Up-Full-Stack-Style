@@ -9,5 +9,8 @@ export default {
     },
     auth: {
         secret: process.env.SECRET
+    },
+    stripe: {
+        sk_key: process.env.STRIPE_SK
     }
 }

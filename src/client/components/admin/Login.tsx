@@ -7,8 +7,8 @@ class Login extends React.Component<ILoginProps, ILoginState> {
     constructor(props: ILoginProps) {
         super(props);
         this.state = {
-            email: null,
-            password: null,
+            email: '',
+            password: '',
             loginStatus: false
         };
     }
@@ -18,7 +18,7 @@ class Login extends React.Component<ILoginProps, ILoginState> {
 
     componentDidMount() {
         if(User && User.role === 'admin') {
-            this.props.history.replace('/admin');
+            this.props.history.replace('/login');
         }
     }
 

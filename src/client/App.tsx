@@ -9,7 +9,8 @@ import BlogList from './components/public/BlogList';
 import OneBlog from './components/public/OneBlog';
 import Admin from './components/admin/Admin';
 import Login from './components/admin/Login';
-
+import Donate from './components/public/Donate';
+import Register from './components/admin/Register';
 
 export default class App extends React.Component<IAppProps, IAppState> {
 
@@ -24,6 +25,8 @@ export default class App extends React.Component<IAppProps, IAppState> {
                         <Route exact path="/:id/admin" component={Admin} />
                         <Route exact path="/new" component={AddBlog} />
                         <Route exact path="/login" component={Login} />
+                        <Route exact path="/donate" component={Donate} />   
+                        <Route exact path="/register" component={Register} />                        
                     </Switch>
                     {/* <Footer /> */}
                </>
