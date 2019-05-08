@@ -20,6 +20,7 @@ export default class Nav extends React.Component<INavProps, INavState> {
           <Link to="/donate" className="mt-5 mx-5 mb-5">Donate</Link>
           <Link to="/login" className="mt-5 mx-5 mb-5">Log In</Link>
           <Link to="/register" className="mt-5 mx-5 mb-5">Register</Link>
+          <Link to="/contact" className="mt-5 mx-5 mb-5">Contact</Link>
           </li>
         </ul>
       </nav>

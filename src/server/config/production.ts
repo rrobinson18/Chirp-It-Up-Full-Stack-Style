@@ -12,5 +12,9 @@ export default {
     },
     stripe: {
         sk_key: process.env.STRIPE_SK
+    },
+    mailgun: {
+        api_key: process.env.MAILGUN_API,
+        domain: process.env.MAILGUN_DOMAIN
     }
 }

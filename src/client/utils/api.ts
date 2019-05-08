@@ -38,7 +38,7 @@ export const SetAccessToken = (token: string, user: {} = {userid: undefined, rol
     AccessToken = token;
     User = user;
 
-    localStorage.setItem('token', token);
+    localStorage.setItem('tokens', token);
     localStorage.setItem('userid', User.userid);
     localStorage.setItem('role', User.role);
 };

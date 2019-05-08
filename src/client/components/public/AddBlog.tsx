@@ -23,7 +23,7 @@ import { RouteComponentProps } from 'react-router-dom';
 
     async componentDidMount() {
         if(!User || User.userid === null || User.role !== 'admin') {
-            this.props.history.replace('/login');
+            this.props.history.push('/login');
         }
         try {
             let tags = await json('/api/tags');

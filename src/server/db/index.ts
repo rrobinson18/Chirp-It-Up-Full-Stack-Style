@@ -8,11 +8,11 @@ import tags from './queries/tags';
 import users from './queries/users';
 import accesstokens from './queries/accesstoken';
 
-export const Connection = mysql.createConnection(config.mysql);
+export const Connection = mysql.createPool(config.mysql);
 
-Connection.connect(err => {
-    if(err) console.log(err);
-});
+// Connection.query(err => {
+//     if(err) console.log(err);
+// });
 
 export const Query = (query: string, values?: Array<string | number>) => {
     return new Promise<Array<any>>((resolve, reject) => {

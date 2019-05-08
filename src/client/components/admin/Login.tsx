@@ -11,6 +11,8 @@ class Login extends React.Component<ILoginProps, ILoginState> {
             password: '',
             loginStatus: false
         };
+
+        this.handleLogSubmit = this.handleLogSubmit.bind(this);
     }
 
     private alert: JSX.Element = null;
