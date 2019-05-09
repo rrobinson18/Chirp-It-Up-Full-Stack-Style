@@ -39,6 +39,7 @@ export default class Email extends React.Component<IEmailProps, IEmailState> {
                 this.setState({ emailStatus: 'error' });
             }
         } catch (e) {
+            this.setState({ emailStatus: 'error' });
             throw e;
         } finally {
             this.emailing = false;
@@ -74,7 +75,7 @@ export default class Email extends React.Component<IEmailProps, IEmailState> {
                     {this.alert}
                 </form>
             </main>
-        )
+        );
     }
 }
 

@@ -11,8 +11,6 @@ class Login extends React.Component<ILoginProps, ILoginState> {
             password: '',
             loginStatus: false
         };
-
-        this.handleLogSubmit = this.handleLogSubmit.bind(this);
     }
 
     private alert: JSX.Element = null;
@@ -41,7 +39,7 @@ class Login extends React.Component<ILoginProps, ILoginState> {
             if(result) {
                 SetAccessToken(result.token, { userid: result.userid, role: result.role });
                 if (result.role === 'admin') {
-                    this.props.history.push('/admin');
+                    this.props.history.push('/new');
                 } else {
                     this.props.history.push('/');
                 }
@@ -75,9 +73,9 @@ class Login extends React.Component<ILoginProps, ILoginState> {
                         placeholder="Type Email Here" 
                         value={this.state.email} 
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.setState({ email: e.target.value})} />
-                        <label>PassWord</label>
+                        <label>Password</label>
                         <input type="password"
-                        className="form control p-1 mb-1"
+                        className="form-control p-1 mb-1"
                         placeholder="Password"
                         value={this.state.password}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.setState({password: e.target.value})} />

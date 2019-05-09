@@ -5,7 +5,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
 
-export default class OneBlog extends React.Component<IOneBlogProps, IOneBlogState> {
+class OneBlog extends React.Component<IOneBlogProps, IOneBlogState> {
   
   constructor(props: IOneBlogProps) {
     super(props);
@@ -71,3 +71,5 @@ interface IOneBlogState {
     name: string,
   }[]
 }
+
+export default OneBlog;

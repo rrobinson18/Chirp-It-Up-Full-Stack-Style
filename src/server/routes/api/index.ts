@@ -6,7 +6,7 @@ import blogtagsRouter from './blogtags';
 import tagsRouter from './tags';
 import usersRouter from './users';
 import donateRouter from './donate';
-import mailgunRouter from './mailgun'
+import emailRouter from './mailgun'
 
 
 const router = express.Router();
@@ -23,7 +23,7 @@ router.use('/blogtags', blogtagsRouter);
 router.use('/tags', tagsRouter);
 router.use('/users', usersRouter);
 router.use('/donate', donateRouter);
-router.use('/mailgun', mailgunRouter);
+router.use('/contact', emailRouter);
 
 
 export default router;

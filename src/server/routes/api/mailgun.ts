@@ -2,18 +2,18 @@ import * as express from 'express';
 import { sendEmail } from '../../utils/mailgun/mail';
 
 
-const router = express.Router();
+const emailRouter = express.Router();
 
 
-router.post('/', async (req, res, next) => {
+emailRouter.post('/', async (req, res, next) => {
     try {
         await sendEmail('robinson.rakesha@gmail.com', req.body.email, req.body.subject, req.body.message);
-        res.json({message: 'Email sent!'});
+        res.send('Email sent!');
     } catch (e) {
         console.log(e);
-        res.sendStatus(500);
+        res.status(500);
     }
-})
+});
 
 
-export default router;
+export default emailRouter;

@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router-dom';
 
 
 
- export default class AddBlog extends React.Component<IAddBlogProps, IAppBlogState> {
+class AddBlog extends React.Component<IAddBlogProps, IAppBlogState> {
     constructor(props: any) {
         super(props);
 
@@ -22,9 +22,11 @@ import { RouteComponentProps } from 'react-router-dom';
     private saving: boolean = false;
 
     async componentDidMount() {
-        if(!User || User.userid === null || User.role !== 'admin') {
-            this.props.history.push('/login');
+        if (!User || User.userid === null || User.role !== 'admin') {
+            this.props.history.replace('/admin');
+            console.log(User);
         }
+
         try {
             let tags = await json('/api/tags');
             this.setState({ tags });
@@ -33,23 +35,12 @@ import { RouteComponentProps } from 'react-router-dom';
         }
     }
 
-     updateContent = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({ content: e.target.value });
-    }
-
-    updateSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        this.setState({ selectedTag: e.target.value });
-    }
-
-
-    updateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({ title: e.target.value });
-    }
-
-    addBlog = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    
+     async handleAddBlog (e: React.FormEvent<HTMLFormElement>) {
+         
         e.preventDefault();
 
-        if(this.saving) return;
+        if (this.saving) return;
 
         let body = { 
             title: this.state.title, 
@@ -75,7 +66,7 @@ import { RouteComponentProps } from 'react-router-dom';
             }
         } catch (e) {
             this.setState({ saveStatus: 'error' })
-            throw(e);
+            throw e;
         } finally {
             this.saving = false;
         }
@@ -83,7 +74,7 @@ import { RouteComponentProps } from 'react-router-dom';
     
 render() {
 
-    if(this.state.saveStatus === 'success') {
+    if (this.state.saveStatus === 'success') {
         this.alert = <div className='alert alert-success p-1 m-3' role='alert'>Blog Added</div>
     } else if(this.state.saveStatus === 'error') {
         this.alert = <div className='alert alert-danger p-1 m-3' role='alert'>Error Adding Blog</div>
@@ -91,30 +82,38 @@ render() {
     }
 
     return (
-        <Fragment>
         <div className="container">
                 <div className="form-group m-2">
-                    <form className="p-4 bg-light border border-dark rounded">
+                    <form className="p-4 bg-light border border-dark rounded"
+                    onSubmit={(e) => this.handleAddBlog(e)} >
                         <label className="font-weight-bold">Blog Title </label>
-                        <input type="text" value={this.state.title} onChange={ this.updateTitle}
-                            className="form-control" id="blog-title"
-                            placeholder="Blog Title" />
+                        <input type="text" value={this.state.title} 
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.setState({ title: e.target.value })}
+                        className="form-control" id="blog-title"
+                        placeholder="Blog Title" />
                         <label className="font-weight-bold">Blog Tag</label>
-                        <select value={this.state.selectedTag} onChange={this.updateSelect} className="form-control">
+                        <select value={this.state.selectedTag}
+                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                            this.setState({ selectedTag: e.target.value });
+                        }} 
+                         className="form-control">
                             <option value="0">Select a tag...</option>
                             {this.state.tags.map(tag => (
                                 <option key={tag.id} value={tag.id}>{tag.name}</option>
                             ))}
                         </select>
                         <label className="font-weight-bold">Blog Text</label>
-                        <input className="form-control" value={this.state.content} id="blog-text" onChange={ this.updateContent }
+                        <input className="form-control"
+                         value={this.state.content} id="blog-text" 
+                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            this.setState({ content: e.target.value });
+                        }}
                             placeholder="Type here ..." />
-                        <button onClick={ this.addBlog } className="btn btn-primary m-2">Submit</button>
+                        <button type="submit" className="btn btn-primary m-2">Submit</button>
                         {this.alert}
                     </form>
                 </div>
             </div>
-            </Fragment>
         );
     }   
 }
@@ -133,5 +132,7 @@ render() {
             id: number,
             name: string,
             _created: Date
-        }[]
+        }[];
     }
+
+    export default AddBlog;

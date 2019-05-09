@@ -1,5 +1,5 @@
 import * as mailgunLoader from 'mailgun-js';
-import config from "../../config/";
+import config from "../../config";
 
 
 let mailgun = mailgunLoader({

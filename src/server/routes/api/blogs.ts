@@ -43,7 +43,7 @@ router.post('/', isAdmin,  async (req, res, next) => {
        let { insertId }: any = await DB.blogs.postBlog(title, content, name);
      //insert into blogtags with that blogid and the tagid from front-end
        await DB.blogtags.insertBlogTag(insertId, req.body.tagid);
-        res.json('Blog added!');
+        res.json({message: 'Blog added!'});
     } catch (e) {
         console.log(e);
         res.sendStatus(500);

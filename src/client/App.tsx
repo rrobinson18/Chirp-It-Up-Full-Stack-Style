@@ -20,6 +20,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
            <Router>
                <>
                     <Nav />
+                    <div className="container">
                     <Switch>
                         <Route exact path="/" component={BlogList} />
                         <Route exact path="/view/:id" component={OneBlog} />
@@ -30,6 +31,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
                         <Route exact path="/register" component={Register} />  
                         <Route exact path="/contact" component={Email} />                      
                     </Switch>
+                    </div>
                     {/* <Footer /> */}
                </>
            </Router>

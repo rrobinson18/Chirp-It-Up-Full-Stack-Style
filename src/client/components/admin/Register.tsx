@@ -75,11 +75,11 @@ class Register extends React.Component<IRegisterProps, IRegisterState> {
                 <input className="form-control p-1 my-2" 
                 value={this.state.name} 
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.setState({ name: e.target.value })} />
-                <label>Name:</label>
+                <label>Email:</label>
                 <input className="form-control p-1 my-2" 
                 value={this.state.email} 
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.setState({ email: e.target.value })} />
-                <label>Name:</label>
+                <label>Password:</label>
                 <input className="form-control p-1 my-2" 
                 value={this.state.password} 
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.setState({ password: e.target.value })} />
